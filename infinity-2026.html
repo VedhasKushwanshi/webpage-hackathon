@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INFINITY 2026 | UPES Space Hackathon</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#02050d;--ink:#e6f7fb;--mute:#8aa3b3;--cy:#66f4ff;--li:#c4ff4d;--co:#ff6a5d;--line:rgba(102,244,255,.16);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.74rem;letter-spacing:.04em}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+.vig{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 60% 45%,transparent 30%,rgba(2,5,13,.85) 100%)}
+.grid{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px;-webkit-mask-image:linear-gradient(transparent,#000 70%);mask-image:linear-gradient(transparent,#000 70%)}
+#bar{position:fixed;left:0;top:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--cy),var(--li));z-index:60}
+header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 5vw;border-bottom:1px solid var(--line);background:rgba(2,5,13,.55);backdrop-filter:blur(16px)}
+header b{font-size:1.15rem;letter-spacing:.02em}
+header b small{color:var(--mute);margin-left:10px;font-weight:400}
+nav{display:flex;gap:28px}
+a{color:inherit;text-decoration:none}
+nav a{color:var(--mute);transition:color .2s}nav a:hover,nav a:focus-visible{color:var(--cy);outline:none}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;background:var(--cy);color:#02121a;font-weight:600;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:background .2s,transform .2s}
+.btn:hover,.btn:focus-visible{background:var(--li);transform:translateY(-2px);outline:none}
+main{position:relative;z-index:2}
+section{min-height:100vh;padding:15vh 5vw 10vh;display:flex;flex-direction:column;justify-content:center;max-width:1500px;margin:0 auto}
+.hero{justify-content:flex-end;padding-bottom:9vh}
+.live{display:flex;align-items:center;gap:12px;color:var(--cy);margin-bottom:26px}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--cy);box-shadow:0 0 0 0 var(--cy);animation:ping 1.6s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 12px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.hero p.pre{margin:0 0 6px;color:var(--mute)}
+h1{margin:0;font-size:clamp(4rem,16vw,14rem);font-weight:700;line-height:.8;letter-spacing:-.03em;will-change:transform}
+h1 span{display:inline-block;animation:drop 1.2s cubic-bezier(.2,.8,.2,1) both}
+@keyframes drop{from{opacity:0;transform:translateY(60px) rotateX(-70deg);filter:blur(12px)}}
+.row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:30px;margin-top:30px}
+h2.big{margin:0;font-size:clamp(1.8rem,5vw,4rem);line-height:1.05;font-weight:500}
+h2.big em{font-style:normal;color:var(--cy)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:16px 44px;border-left:1px solid var(--cy);padding-left:20px}
+.facts span{display:block;color:var(--mute)}
+.cd{display:flex;gap:22px;margin-top:34px}
+.cd div{font-size:2rem;font-weight:600;line-height:1}
+.cd small{display:block;font-size:.65rem;color:var(--mute);font-family:"IBM Plex Mono",monospace;margin-top:6px;font-weight:400}
+.idx{color:var(--cy);margin:0 0 22px}
+.split{display:grid;grid-template-columns:repeat(12,1fr);gap:40px}
+.split>:first-child{grid-column:span 4}.split>:last-child{grid-column:6/span 7}
+.lead{font-size:clamp(1.7rem,4.6vw,4rem);font-weight:600;line-height:1.05;margin:0}
+.body{max-width:52ch;color:var(--mute);font-size:1.08rem;margin:28px 0 0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line);padding:24px 0;margin-top:44px}
+.stats b{display:block;font-size:clamp(2rem,5vw,3.6rem);color:var(--cy);line-height:1}
+.stats span{color:var(--mute)}
+.track{display:grid;grid-template-columns:60px 4fr 5fr 2fr;gap:24px;align-items:center;padding:36px 0;border-top:1px solid var(--line);position:relative;overflow:hidden}
+.track:last-child{border-bottom:1px solid var(--line)}
+.track::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(102,244,255,.12),transparent);transform:translateX(-101%);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.track:hover::before{transform:none}
+.track>*{position:relative}
+.track h3{margin:0;font-size:clamp(1.7rem,4vw,3.2rem);font-weight:700;transition:transform .4s,color .3s}
+.track:hover h3{transform:translateX(14px);color:var(--cy)}
+.track p{margin:0;color:var(--mute)}
+.tag{justify-self:end;border:1px solid var(--line);padding:4px 12px;color:var(--cy)}
+ol{list-style:none;margin:0;padding:0}
+li{display:grid;grid-template-columns:32px 1fr;gap:20px;padding-bottom:46px;position:relative}
+li::before{content:"";position:absolute;left:5px;top:16px;bottom:0;width:1px;background:var(--line)}
+li:last-child::before{display:none}
+li i{width:12px;height:12px;border:2px solid var(--cy);border-radius:50%;background:var(--bg);margin-top:6px;z-index:1;transition:.4s}
+li.in i{background:var(--li);border-color:var(--li);box-shadow:0 0 18px var(--li)}
+li h3{margin:6px 0 0;font-size:clamp(1.5rem,3.6vw,2.6rem);font-weight:600}
+.reg{text-align:center;align-items:center;border-block:1px solid rgba(102,244,255,.3)}
+.reg h2{font-size:clamp(2.8rem,8vw,7rem);line-height:.95;margin:18px 0;font-weight:700;max-width:14ch}
+.reg p{color:var(--mute);max-width:44ch}
+.reg .btn{margin-top:30px;padding:16px 30px;font-size:1rem}
+.meta{display:flex;flex-wrap:wrap;justify-content:center;gap:28px;margin-top:44px;color:var(--mute)}
+.tick{position:relative;z-index:2;overflow:hidden;border-block:1px solid var(--line);background:rgba(2,5,13,.7);padding:12px 0;white-space:nowrap;color:var(--li)}
+.tick div{display:inline-block;animation:mq 30s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+footer{position:relative;z-index:2;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:24px 5vw;border-top:1px solid var(--line);color:var(--mute)}
+.rv{opacity:0;transform:translateY(50px);clip-path:inset(0 0 30% 0);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1),clip-path .9s}
+.rv.in{opacity:1;transform:none;clip-path:inset(0)}
+@media(max-width:820px){nav{display:none}header b small{display:none}
+.split>:first-child,.split>:last-child{grid-column:1/-1}.track{grid-template-columns:1fr;gap:10px}.tag{justify-self:start}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;clip-path:none;transition:none}h1 span,.tick div,.live i{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas><div class="vig"></div><div class="grid"></div><div id="bar"></div>
+<header>
+  <a href="#top"><b>INFINITY<small class="mono">UPES SPACE CLUB</small></b></a>
+  <nav class="mono"><a href="#mission">MISSION</a><a href="#tracks">TRACKS</a><a href="#timeline">TIMELINE</a></nav>
+  <a class="btn mono" href="#register">REGISTER ↗</a>
+</header>
+<main>
+<section id="top" class="hero">
+  <div class="live mono"><i></i>TRANSMISSION ACTIVE · 36 HOURS</div>
+  <p class="pre mono">UPES INFINITY SPACE CLUB PRESENTS</p>
+  <h1 id="h1" aria-label="Infinity"><span style="animation-delay:.05s">I</span><span style="animation-delay:.12s">N</span><span style="animation-delay:.19s">F</span><span style="animation-delay:.26s">I</span><span style="animation-delay:.33s">N</span><span style="animation-delay:.4s">I</span><span style="animation-delay:.47s">T</span><span style="animation-delay:.54s">Y</span></h1>
+  <div class="row">
+    <div>
+      <h2 class="big">Build beyond<br><em>the known.</em></h2>
+      <div class="cd" id="cd"></div>
+    </div>
+    <div class="facts mono">
+      <div><span>DATE</span>10–11 OCT 2026</div><div><span>LOCATION</span>UPES, DEHRADUN</div>
+      <div><span>FORMAT</span>36H / ON CAMPUS</div><div><span>TEAM</span>2–4 EXPLORERS</div>
+    </div>
+  </div>
+</section>
+
+<div class="tick mono" aria-hidden="true"><div>SPACE TECH ✦ AI × DATA ✦ OPEN INNOVATION ✦ 36 HOURS ✦ 10–11 OCT 2026 ✦ UPES DEHRADUN ✦ SPACE TECH ✦ AI × DATA ✦ OPEN INNOVATION ✦ 36 HOURS ✦ 10–11 OCT 2026 ✦ UPES DEHRADUN ✦ </div></div>
+
+<section id="mission">
+  <div class="split">
+    <div><p class="idx mono rv">01 / MISSION</p></div>
+    <div>
+      <p class="lead rv">The next frontier won’t discover itself.</p>
+      <p class="body rv">Bring your code, curiosity, and most impossible ideas. For 36 hours, student innovators collide to solve challenges inspired by space, data, and life on Earth.</p>
+      <div class="stats mono rv"><div><b data-n="36">0</b><span>NONSTOP HOURS</span></div><div><b data-n="3">0</b><span>MISSION TRACKS</span></div><div><b>∞</b><span>POSSIBILITIES</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="tracks">
+  <p class="idx mono rv">02 / CHOOSE YOUR TRAJECTORY</p>
+  <div>
+    <article class="track rv"><span class="mono" style="color:var(--cy)">01</span><h3>SPACE TECH</h3><p>Design systems for exploration, orbital intelligence, and life beyond Earth.</p><span class="tag mono">ORBITAL</span></article>
+    <article class="track rv"><span class="mono" style="color:var(--cy)">02</span><h3>AI × DATA</h3><p>Turn deep-space datasets into decisions that matter on Earth and in orbit.</p><span class="tag mono">SIGNAL</span></article>
+    <article class="track rv"><span class="mono" style="color:var(--cy)">03</span><h3>OPEN INNOVATION</h3><p>Build the unexpected. Any bold idea with real-world gravity belongs here.</p><span class="tag mono">FRONTIER</span></article>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="split">
+    <div><p class="idx mono rv">03 / FLIGHT PLAN</p><h2 class="lead rv">T–36 hours</h2></div>
+    <ol>
+      <li class="rv"><i></i><div><span class="mono" style="color:var(--cy)">DAY 01 / 09:00</span><h3>Mission brief</h3></div></li>
+      <li class="rv"><i></i><div><span class="mono" style="color:var(--cy)">DAY 01 / 12:00</span><h3>Build phase</h3></div></li>
+      <li class="rv"><i></i><div><span class="mono" style="color:var(--cy)">DAY 02 / 14:00</span><h3>Final transmission</h3></div></li>
+      <li class="rv"><i></i><div><span class="mono" style="color:var(--cy)">DAY 02 / 18:00</span><h3>Awards + liftoff</h3></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="register" class="reg">
+  <p class="mono rv" style="color:var(--mute)">APPLICATION WINDOW / NOW OPEN</p>
+  <h2 class="rv">Your mission starts here.</h2>
+  <p class="rv">Assemble your crew. Choose your challenge. Launch something that has never existed before.</p>
+  <a class="btn mono rv" href="mailto:infinity@ddn.upes.ac.in?subject=Infinity%202026%20Registration">JOIN THE MISSION ↗</a>
+  <div class="meta mono rv"><span>10–11 OCT 2026</span><span>36 HOURS</span><span>UPES DEHRADUN</span></div>
+</section>
+</main>
+<footer class="mono"><span>UPES INFINITY SPACE CLUB © 2026</span><span>TRANSMISSION ENDS / SEE YOU IN ORBIT</span></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var CY=0x66f4ff,LI=0xc4ff4d,CO=0xff6a5d;
+var scene=new THREE.Scene();scene.background=new THREE.Color(0x02050d);scene.fog=new THREE.FogExp2(0x02050d,.035);
+var cam=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,300);cam.position.set(0,1.3,9.2);
+var R=new THREE.WebGLRenderer({canvas:document.getElementById('bg'),antialias:true});
+R.setPixelRatio(Math.min(devicePixelRatio,1.6));R.setSize(innerWidth,innerHeight);
+scene.add(new THREE.AmbientLight(CY,.45));
+var dl=new THREE.DirectionalLight(CY,2.1);dl.position.set(5,6,5);scene.add(dl);
+var pl=new THREE.PointLight(CO,28,12);pl.position.set(-4,1,4);scene.add(pl);
+
+// planet
+var planet=new THREE.Group();planet.position.set(1.2,-.4,0);planet.rotation.set(.12,0,-.18);
+planet.add(new THREE.Mesh(new THREE.SphereGeometry(2.25,64,64),new THREE.MeshStandardMaterial({color:0x07162b,roughness:.68,metalness:.18})));
+planet.add(new THREE.Mesh(new THREE.SphereGeometry(2.29,32,32),new THREE.MeshBasicMaterial({color:CY,wireframe:true,transparent:true,opacity:.12})));
+function ring(r,t,c,o,rx){var m=new THREE.Mesh(new THREE.TorusGeometry(r,t,12,180),new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:o}));m.rotation.set(rx,.1,0);planet.add(m);return m}
+var r1=ring(3.15,.025,CY,.72,Math.PI/2.6),r2=ring(2.86,.008,LI,.45,Math.PI/2.35);
+scene.add(planet);
+
+// satellite
+var sat=new THREE.Group();
+sat.add(new THREE.Mesh(new THREE.OctahedronGeometry(.28,0),new THREE.MeshStandardMaterial({color:CO,emissive:CO,emissiveIntensity:.65})));
+[-.58,.58].forEach(function(x){var p=new THREE.Mesh(new THREE.BoxGeometry(.9,.06,.5),new THREE.MeshStandardMaterial({color:CY,emissive:CY,emissiveIntensity:.35}));p.position.x=x;sat.add(p)});
+scene.add(sat);
+
+// sparkles (two colours) + deep star field that streaks with scroll speed
+function pts(n,sx,sy,sz,size,col,op){var g=new THREE.BufferGeometry(),a=new Float32Array(n*3);
+  for(var i=0;i<n;i++){a[i*3]=(Math.random()-.5)*sx;a[i*3+1]=(Math.random()-.5)*sy;a[i*3+2]=(Math.random()-.5)*sz}
+  g.setAttribute('position',new THREE.BufferAttribute(a,3));
+  var p=new THREE.Points(g,new THREE.PointsMaterial({color:col,size:size,transparent:true,opacity:op,depthWrite:false}));scene.add(p);return p}
+var sp1=pts(260,18,11,12,.06,CY,.7),sp2=pts(90,14,8,10,.09,LI,.5),deep=pts(1500,120,80,120,.09,0xffffff,.65);
+
+// drifting rocks
+var rocks=[];
+for(var i=0;i<14;i++){var m=new THREE.Mesh(new THREE.IcosahedronGeometry(Math.random()*.35+.12,0),new THREE.MeshStandardMaterial({color:0x35506b,roughness:1,flatShading:true}));
+  m.position.set((Math.random()-.5)*14,(Math.random()-.5)*8,(Math.random()-.5)*10-2);m.userData.s=Math.random()*.01+.003;scene.add(m);rocks.push(m)}
+
+var prog=0,cprog=0,vel=0,lastY=scrollY;
+function onS(){var h=document.documentElement.scrollHeight-innerHeight;prog=h>0?scrollY/h:0;vel=scrollY-lastY;lastY=scrollY}
+addEventListener('scroll',onS,{passive:true});onS();
+addEventListener('resize',function(){cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight)});
+var bar=document.getElementById('bar'),h1=document.getElementById('h1'),clock=new THREE.Clock(),tv=new THREE.Vector3(),sv=0;
+function loop(){
+  var dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime,k=1-Math.exp(-2.8*dt);
+  cprog+=(prog-cprog)*k;
+  tv.set(Math.sin(cprog*Math.PI*1.6)*3.2,1.3-cprog*2.2,9.2-cprog*3.8);
+  cam.position.lerp(tv,k);cam.lookAt(0,-.2+cprog*.8,0);
+  scene.rotation.y+=(cprog*Math.PI*.7-scene.rotation.y)*(1-Math.exp(-2.2*dt));
+  planet.rotation.y+=dt*.12;r1.rotation.z=t*.06;r2.rotation.z=-t*.09;
+  var a=t*.18;sat.position.set(Math.cos(a)*4.2,Math.sin(a*1.4)*1.1,Math.sin(a)*2.4);sat.rotation.y+=dt*.5;
+  sp1.rotation.y=t*.02;sp2.rotation.y=-t*.015;
+  sv+=(Math.min(Math.abs(vel),80)/80-sv)*.1;vel*=.9;
+  deep.scale.z=1+sv*10;deep.rotation.z=t*.004;
+  rocks.forEach(function(r){r.rotation.x+=r.userData.s;r.rotation.y+=r.userData.s*1.4});
+  bar.style.transform='scaleX('+cprog+')';
+  h1.style.transform='translateY('+Math.min(scrollY,innerHeight)*.25+'px) scale('+(1+Math.min(scrollY,innerHeight)/innerHeight*.12)+')';
+  R.render(scene,cam);requestAnimationFrame(loop);
+}
+loop();
+
+// reveals + stat count-up + timeline lights
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;
+  e.target.classList.add('in');io.unobserve(e.target);
+  e.target.querySelectorAll('[data-n]').forEach(function(b){var n=+b.dataset.n,s=performance.now();
+    (function f(now){var p=Math.min((now-s)/1200,1);b.textContent=Math.round(n*p);if(p<1)requestAnimationFrame(f)})(s)});
+})},{threshold:.25});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+
+// countdown to Day 01 / 09:00 IST
+var cd=document.getElementById('cd'),T=new Date('2026-10-10T09:00:00+05:30');
+function tick(){var d=T-Date.now();
+  if(d<=0){cd.innerHTML='<div style="font-size:1rem;color:var(--li)" class="mono">MISSION IS LIVE</div>';return}
+  var v=[Math.floor(d/864e5),Math.floor(d/36e5)%24,Math.floor(d/6e4)%60,Math.floor(d/1e3)%60],n=['DAYS','HRS','MIN','SEC'];
+  cd.innerHTML=v.map(function(x,i){return '<div>'+String(x).padStart(2,'0')+'<small>'+n[i]+'</small></div>'}).join('');}
+tick();setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>
